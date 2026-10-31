@@ -1,0 +1,68 @@
+[준비] git init
+
+[준비] git config user.email test@test.com
+
+[준비] git config user.name tester
+
+[통과] py_compile
+
+
+[준비] git add -A
+
+[준비] git commit -q -m init
+
+[통과] python main.py commit
+[INFO] 변경 사항이 없습니다. 커밋 메시지를 생성하지 않고 종료합니다.
+
+[준비] python -c "open('a.txt','w').write('hello\nworld\n')"
+
+[준비] git add a.txt
+
+[통과] python main.py commit
+[INFO] Git status 수집 완료: 1개 파일 변경 감지
+[INFO] Git diff 수집 완료: 8줄
+[ERROR] AI_API_KEY 환경변수가 설정되지 않았습니다.
+
+[통과] python main.py pr
+[INFO] 현재 브랜치: master
+[ERROR] AI_API_KEY 환경변수가 설정되지 않았습니다.
+
+[통과] python main.py commit --temperature abc
+usage: gitgen commit [-h] [--model MODEL] [--temperature TEMPERATURE]
+                     [--max-tokens MAX_TOKENS] [--safe-mode]
+gitgen commit: error: argument --temperature: invalid float value: 'abc'
+
+[통과] python main.py bogus
+usage: gitgen [-h] {commit,pr} ...
+gitgen: error: argument command: invalid choice: 'bogus' (choose from 'commit', 'pr')
+
+[통과] python main.py commit
+[INFO] Git status 수집 완료: 1개 파일 변경 감지
+[INFO] Git diff 수집 완료: 8줄
+[INFO] AI API 호출 횟수: 1
+[INFO] AI API 요청 중...
+[DONE] 커밋 메시지 생성 완료
+
+--- Commit Message ---
+feat: a.txt 추가
+
+- a.txt 파일을 새로 생성하고 `hello`, `world` 내용을 추가함
+----------------------
+
+[준비] python -c "open('memo.txt','w',encoding='utf-8').write('한글 메모: 결제 오류 수정')"
+
+[준비] git add memo.txt
+
+[통과] python main.py commit
+[INFO] Git status 수집 완료: 2개 파일 변경 감지
+[INFO] Git diff 수집 완료: 16줄
+[INFO] AI API 호출 횟수: 1
+[INFO] AI API 요청 중...
+[DONE] 커밋 메시지 생성 완료
+
+--- Commit Message ---
+feat: a.txt와 memo.txt 추가
+
+- a.txt에 hello/world 내용 추가
+- memo.txt에 한글 메모: 결제 오류 수정 내용 추가
+----------------------
